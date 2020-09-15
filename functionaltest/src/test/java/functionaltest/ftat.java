@@ -44,25 +44,21 @@ public class ftat {
 
 	@Test(priority = 1)
 	public void viewrepairticket() throws Exception {
-		WebElement welcome = wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.xpath("//h2[text()='WELCOME TO YOUR ACCOUNT OVERVIEW']")));
+		WebElement welcome = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[text()='WELCOME TO YOUR ACCOUNT OVERVIEW']")));
 		welcome.isDisplayed();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		WebElement prepair = wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.xpath("//p[text()='REPAIR']")));
+		WebElement prepair = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[text()='REPAIR']")));
 		prepair.isDisplayed();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.get(URL1);
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		WebElement repair = wait.until(
-				ExpectedConditions.visibilityOfElementLocated(By.xpath("//font[text()='Create Repair Ticket']")));
+		WebElement repair = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//font[text()='Create Repair Ticket']")));
 		repair.isDisplayed();
 		WebElement cancel = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Cancel']")));
 		cancel.click();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		Thread.sleep(3000);
-		WebElement repair1 = wait
-				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[text()='Repair Ticket Page']")));
+		WebElement repair1 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[text()='Repair Ticket Page']")));
 		repair1.isDisplayed();
 	}
 
