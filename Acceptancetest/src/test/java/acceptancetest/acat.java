@@ -12,8 +12,8 @@ public class acat {
 	public HtmlUnitDriver driver;
 	//public WebDriver driver;
 	public WebDriverWait wait;
-	public String URL = "http://104.154.85.52/ProdWebapp";
-	public String URL1 = "http://104.154.85.52/ProdWebapp/avncreatepage.jsp";
+	public String URL = "http://35.193.84.229/ProdWebapp";
+	public String URL1 = "http://35.193.84.229/ProdWebapp/avncreatepage.jsp";
 	//public String URL = "http://localhost:8080/AVNCommunication-1.0/avnlogin.jsp";
 	//public String URL1 = "http://localhost:8080/AVNCommunication-1.0/avncreatepage.jsp";
 	
