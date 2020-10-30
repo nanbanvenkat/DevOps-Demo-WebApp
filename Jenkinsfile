@@ -41,8 +41,8 @@ node {
     }
 //
     stage('Deploy to Test') {
-	deploy adapters: [tomcat7(credentialsId: 'AWStomcat', path: '', url: 'http://18.217.15.48:8080/')], contextPath: '/QAWebapp', war: '**/*.war'
-	jiraSendDeploymentInfo environmentId: 'Test', environmentName: 'QA test', environmentType: 'testing', serviceIds: ['http://18.217.15.48:8080/QAWebapp/'], site: 'devopsbc.atlassian.net', state: 'successful'
+	deploy adapters: [tomcat7(credentialsId: 'AWStomcat', path: '', url: 'http://18.222.2.156:8080/')], contextPath: '/QAWebapp', war: '**/*.war'
+	jiraSendDeploymentInfo environmentId: 'Test', environmentName: 'QA test', environmentType: 'testing', serviceIds: ['http://18.222.2.156:8080/QAWebapp/'], site: 'devopsbc.atlassian.net', state: 'successful'
     }
 //
     stage('Store the Artifacts') {
@@ -59,9 +59,9 @@ node {
     }
 //
     stage('Deploy to Prod') {
-	      deploy adapters: [tomcat7(credentialsId: 'AWStomcat', path: '', url: 'http://3.14.10.76:8080/')], contextPath: '/ProdWebapp', war: '**/*.war'
-	     jiraSendDeploymentInfo environmentId: 'Staging', environmentName: 'Staging', environmentType: 'staging', serviceIds: ['http://3.14.10.76:8080/ProdWebapp'], site: 'devopsbc.atlassian.net', state: 'successful'
-	     jiraSendDeploymentInfo environmentId: 'Prod', environmentName: 'prod', environmentType: 'production', serviceIds: ['http://3.14.10.76:8080/ProdWebapp'], site: 'devopsbc.atlassian.net', state: 'successful'
+	      deploy adapters: [tomcat7(credentialsId: 'AWStomcat', path: '', url: 'http://18.216.116.49:8080/')], contextPath: '/ProdWebapp', war: '**/*.war'
+	     jiraSendDeploymentInfo environmentId: 'Staging', environmentName: 'Staging', environmentType: 'staging', serviceIds: ['http://18.216.116.49:8080/ProdWebapp'], site: 'devopsbc.atlassian.net', state: 'successful'
+	     jiraSendDeploymentInfo environmentId: 'Prod', environmentName: 'prod', environmentType: 'production', serviceIds: ['http://18.216.116.49:8080/ProdWebapp'], site: 'devopsbc.atlassian.net', state: 'successful'
          }
 //
     stage('Sanity Test') {
