@@ -18,7 +18,7 @@ node {
         rtMaven.deployer releaseRepo:'libs-release-local', snapshotRepo:'libs-snapshot-local', server: server
         rtMaven.resolver releaseRepo:'libs-release', snapshotRepo:'libs-snapshot', server: server
 //  
-	slackSend channel: 'project-dcs', message: "started ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", tokenCredentialId: 'slack'
+	slackSend channel: 'tcsdevopstalk', message: "started ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", tokenCredentialId: 'slack'
 //	    
     stage('Clone source') {
         git url: 'https://github.com/Umamahesh-DevOpsPjt/DevOps-Demo-WebApp.git'
@@ -56,7 +56,6 @@ node {
 //    
     stage('Performance Test') {
     	echo 'Running BlazeMeterTest' 
-//	blazeMeterTest credentialsId: 'BlazeMeter', testId: '7883189.taurus', workspaceId: '470553'
     }
 //
     stage('Deploy to Prod') {
@@ -69,18 +68,18 @@ node {
         buildInfo = rtMaven.run pom: 'Acceptancetest/pom.xml', goals: 'test'
 	publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '\\Acceptancetest\\target\\surefire-reports', reportFiles: 'index.html', reportName: 'Sanity Test Report', reportTitles: ''])
     }
-	slackSend channel: 'project-dcs', message: "Build Completed ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", tokenCredentialId: 'slack'
+	slackSend channel: 'tcsdevopstalk', message: "Build Completed ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", tokenCredentialId: 'slack'
  }
  catch (exc) {
  	echo 'I failed'
-	slackSend channel: 'project-dcs', message: "Build Failed ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", tokenCredentialId: 'slack'
+	slackSend channel: 'tcsdevopstalk', message: "Build Failed ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", tokenCredentialId: 'slack'
  }
  finally {
 	if (currentBuild.result == 'failure') {
-            echo 'I am unstable :/'
+            echo 'Build is unstable :/'
 	     error " failed"
         } else {
-            echo 'One way or another, I have finished $currentBuild.result'
+            echo 'Build is stable, Build Successfully $currentBuild.result'
         }
  }
 }
