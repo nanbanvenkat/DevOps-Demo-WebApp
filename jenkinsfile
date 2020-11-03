@@ -1,11 +1,14 @@
-	 def server = Artifactory.server "artifactory"
+
+pipeline {
+         agent any
+	 environment {
+	 	 def server = Artifactory.server "artifactory"
 	 def rtMaven = Artifactory.newMavenBuild()
 	 def buildInfo 
 	 rtMaven.tool = "maven"
 	 rtMaven.deployer releaseRepo:'libs-release-local', snapshotRepo:'libs-snapshot-local', server: server
          rtMaven.resolver releaseRepo:'libs-release', snapshotRepo:'libs-snapshot', server: server
-pipeline {
-         agent any
+	 }
 	  stages {
                  stage('Clone source') {
                  steps {
