@@ -1,12 +1,22 @@
 pipeline {
          agent any
+	 tools {
+        // Note: this should match with the tool name configured in your jenkins instance (JENKINS_URL/configureTools/)
+        maven 'Maven 3.3.9'
+	jdk 'jdk8'
+   	 }
 	 stages {
                  stage('Clone source') {
                  steps {
                       git url: 'https://github.com/nanbanvenkat/DevOps-Demo-WebApp.git'
                  }
                  }
-                
+		 stage('Maven Build') {
+                 steps {
+                      sh 'mvn -Dmaven.test.failure.ignore=true install' 
+                 }
+                 }
+                                
                  stage('Deploy to test') {
                  steps {
                   deploy adapters: [tomcat8(url: 'http://52.167.166.3:8080/', credentialsId: 'tomcat', path: '' )], contextPath: '/QAWebapp', war: '**/*.war'
