@@ -6,18 +6,19 @@ pipeline {
                       git url: 'https://github.com/nanbanvenkat/DevOps-Demo-WebApp.git'
                  }
                  }
-          stage('Artifactory Configuration') {
+                 stage('Artifactory Configuration') {
                  steps {
                            rtMaven.tool = "maven"   
                            rtMaven.deployer releaseRepo:'libs-release-local', snapshotRepo:'libs-snapshot-local', server: server
                            rtMaven.resolver releaseRepo:'libs-release', snapshotRepo:'libs-snapshot', server: server
                  }
                  }
-           stage('SonarQube') {
+                 stage('SonarQube') {
                  steps {
                           withSonarQubeEnv(credentialsId: 'sonarqube', installationName: 'sonarqube') { 
      	                  sh 'mvn clean package sonar:sonar -Dsonar.host.url=http://34.72.139.131:9000/ -Dsonar.sources=. -Dsonar.tests=. -Dsonar.test.inclusions=**/test/java/servlet/createpage_junit.java -Dsonar.exclusions=**/test/java/servlet/createpage_junit.java'
-                 }
+                        }
+                        }
                  }  
               }
 }
