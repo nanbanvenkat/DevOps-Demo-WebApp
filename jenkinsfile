@@ -2,8 +2,7 @@ pipeline {
          agent any
 	 tools {
         // Note: this should match with the tool name configured in your jenkins instance (JENKINS_URL/configureTools/)
-        maven 'Maven 3.3.9'
-	jdk 'jdk8'
+        maven 'Maven3'
    	 }
 	 stages {
                  stage('Clone source') {
