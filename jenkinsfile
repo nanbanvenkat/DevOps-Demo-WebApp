@@ -30,6 +30,7 @@ pipeline {
                   deploy adapters: [tomcat8(url: 'http://13.68.94.136:8080/', credentialsId: 'tomcat', path: '' )], contextPath: '/QAWebapp', war: '**/*.war'
 	            }
                  }
+		 
 		stage('UI-test') {
                  steps {
 		 	script{
@@ -41,18 +42,21 @@ pipeline {
 				}
 			}
 		}
+		
 		stage('Performance Test') {
 		steps{
 			script{
 			blazeMeterTest credentialsId: 'Blazemeter', testId: '8663167.taurus', workspaceId: '659085'
 			}
 		}
-		}		 
+		}	
+		
 		 stage('Deploy to Prod') {
                  steps {
                   deploy adapters: [tomcat8(url: 'http://52.188.207.204:8080/', credentialsId: 'tomcat', path: '' )], contextPath: '/ProdWebapp', war: '**/*.war'
 		  slackSend channel: 'alerts', message: "Deploy To Prod ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", teamDomain: 'venkattcsdevops', tokenCredentialId: 'slack'
 	            }
+		    
 		stage('Sanity test') {
                  steps {
 		 	script{
@@ -61,8 +65,8 @@ pipeline {
 				rtMaven.tool = "Maven"
 				buildInfo = rtMaven.run pom: 'Acceptancetest/pom.xml', goals: 'test'
 				publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '\\Acceptancetest\\target\\surefire-reports', reportFiles: 'index.html', reportName: 'Sanity Test Report', reportTitles: ''])
-				slackSend channel: 'alerts', message: "Sanity Test ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", teamDomain: 'venkattcsdevops', tokenCredentialId: 'slack'
 				}
+			slackSend channel: 'alerts', message: "Sanity Test ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", teamDomain: 'venkattcsdevops', tokenCredentialId: 'slack'
 			}
 		}   
          }  	               
