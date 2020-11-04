@@ -51,9 +51,20 @@ pipeline {
 		 stage('Deploy to Prod') {
                  steps {
                   deploy adapters: [tomcat8(url: 'http://52.188.207.204:8080/', credentialsId: 'tomcat', path: '' )], contextPath: '/ProdWebapp', war: '**/*.war'
-		  slackSend channel: 'alerts', message: "started ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", teamDomain: 'venkattcsdevops', tokenCredentialId: 'slack'
+		  slackSend channel: 'alerts', message: "Deploy To Prod ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", teamDomain: 'venkattcsdevops', tokenCredentialId: 'slack'
 	            }
-		    
-                 }  	               
+		stage('Sanity test') {
+                 steps {
+		 	script{
+				def rtMaven = Artifactory.newMavenBuild()
+				def buildInfo
+				rtMaven.tool = "Maven"
+				buildInfo = rtMaven.run pom: 'Acceptancetest/pom.xml', goals: 'test'
+				publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '\\Acceptancetest\\target\\surefire-reports', reportFiles: 'index.html', reportName: 'Sanity Test Report', reportTitles: ''])
+				slackSend channel: 'alerts', message: "Sanity Test ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", teamDomain: 'venkattcsdevops', tokenCredentialId: 'slack'
+				}
+			}
+		}   
+         }  	               
         }
 }
