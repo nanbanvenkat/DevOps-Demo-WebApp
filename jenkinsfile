@@ -34,16 +34,16 @@ pipeline {
 		 stage('Deploy Artifacts') {
                  steps{
 			rtPublishBuildInfo(
-				id: 'artifactory',
-				url: 'https://venkatdevops.jfrog.io/artifactory',
-				credentialsId: 'deploy',
-				// If Jenkins is configured to use an http proxy, you can bypass the proxy when using this Artifactory server:
-				bypassProxy: true,
-				// Configure the connection timeout (in seconds).
-				// The default value (if not configured) is 300 seconds:
-				timeout: 300
-				)
-		}
+						id: 'artifactory',
+						url: 'https://venkatdevops.jfrog.io/artifactory',
+						credentialsId: 'deploy',
+						// If Jenkins is configured to use an http proxy, you can bypass the proxy when using this Artifactory server:
+						bypassProxy: true,
+						// Configure the connection timeout (in seconds).
+						// The default value (if not configured) is 300 seconds:
+						timeout: 300
+					)
+			}
 		}
 		stage('UI-test') {
                  steps {
