@@ -51,8 +51,9 @@ pipeline {
 		 stage('Deploy to Prod') {
                  steps {
                   deploy adapters: [tomcat8(url: 'http://52.188.207.204:8080/', credentialsId: 'tomcat', path: '' )], contextPath: '/ProdWebapp', war: '**/*.war'
+		  slackSend channel: 'alerts', message: "started ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", teamDomain: 'venkattcsdevops', tokenCredentialId: 'slack'
 	            }
-		    slackSend channel: 'alerts', message: "started ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", teamDomain: 'venkattcsdevops', tokenCredentialId: 'slack'
+		    
                  }  	               
         }
 }
