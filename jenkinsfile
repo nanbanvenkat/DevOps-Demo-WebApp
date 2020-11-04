@@ -32,7 +32,7 @@ pipeline {
                  }
 		 stage('Deploy Artifactory') {
                  steps {
-		 	id: 'artifactory',
+		 	serverId: 'artifactory',
     			url: 'https://venkatdevops.jfrog.io/artifactory',
 			credentialsId: 'artifactory',
 			bypassProxy: true,
