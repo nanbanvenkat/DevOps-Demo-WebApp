@@ -32,23 +32,11 @@ pipeline {
                  }
 		 stage('Deploy Artifactory') {
                  steps {
-                  	rtServer (
-                    	id: "artifactory",
-                    	url: "https://venkatdevops.jfrog.io/artifactory",
-                    	credentialsId: artifactory
-                	)
-                	rtMavenDeployer (
-                    	id: "MAVEN_DEPLOYER",
-                    	serverId: "artifactory",
-                    	releaseRepo: "libs-release-local",
-                    	snapshotRepo: "libs-snapshot-local"
-                	)
-                	rtMavenResolver (
-                    	id: "MAVEN_RESOLVER",
-                    	serverId: "artifactory",
-                    	releaseRepo: "libs-release",
-                    	snapshotRepo: "libs-snapshot"
-                	)
+		 	id: 'artifactory',
+    			url: 'https://venkatdevops.jfrog.io/artifactory',
+			credentialsId: 'artifactory',
+			bypassProxy: true,
+			timeout: 300                  	
             	}
                }
               	               
