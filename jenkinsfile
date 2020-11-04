@@ -30,6 +30,6 @@ pipeline {
                   deploy adapters: [tomcat8(url: 'http://52.252.0.150:8080/', credentialsId: 'tomcat', path: '' )], contextPath: '/QAWebapp', war: '**/*.war'
 	            }
                  }               
-              	}               
+              	               
             }
 }
