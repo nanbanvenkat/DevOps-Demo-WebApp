@@ -1,9 +1,5 @@
 pipeline {
          agent any
-	 environment {
-	 serverId =''
-	 
-	 }
 	 tools {
         // Note: this should match with the tool name configured in your jenkins instance (JENKINS_URL/configureTools/)
         maven 'Maven'
@@ -36,7 +32,7 @@ pipeline {
                  }
 		 stage('Deploy Artifactory') {
                  steps {
-		 	serverId: 'artifactory',
+	//	 	serverId: 'artifactory',
     			url: 'https://venkatdevops.jfrog.io/artifactory',
 			credentialsId: 'artifactory',
 			bypassProxy: true,
