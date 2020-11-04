@@ -43,7 +43,7 @@ pipeline {
 		}
 		stage('Performance Test') {
 		steps{
-			blazeMeterTest credentialsId: 'BlazeMeter', testId: '8533858.taurus', workspaceId: '659085'
+			blazeMeterTest credentialsId: 'BlazeMeter', testId: '8663167.taurus', workspaceId: '659085'
 			}
 		}		 
 		 stage('Deploy to Prod') {
