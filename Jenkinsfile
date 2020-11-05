@@ -33,27 +33,19 @@ pipeline {
 		 
 		 stage('Deploy Artifacts') {
                  steps{
-			 rtMavenRun ( 
-					tool: Maven, // Tool name from Jenkins configuration 
-					pom: 'maven-example/pom.xml', 
-					goals: 'clean install', 
-					deployerId: "MAVEN_DEPLOYER",
-					resolverId: "MAVEN_RESOLVER" 
-			 )
-			 
 				rtServer (
-                    			id: 'ARTIFACTORY_SERVER',
+                    			id: 'artifactory',
                     			url: 'https://venkatdevops.jfrog.io/artifactory',
                     			credentialsId: 'deploy'
                 			)
                 	rtMavenDeployer (
-                    			id: 'MAVEN_DEPLOYER',
+                    			id: 'artifactory',
                     			serverId: 'artifactory',
                     			releaseRepo: "libs-release-local",
                     			snapshotRepo: "libs-snapshot-local"
                 			)
                 	rtMavenResolver (
-                    			id: 'MAVEN_RESOLVER',
+                    			id: 'artifactory',
                     			serverId: 'artifactory',
                     			releaseRepo: "libs-release",
                     			snapshotRepo: "libs-snapshot"
