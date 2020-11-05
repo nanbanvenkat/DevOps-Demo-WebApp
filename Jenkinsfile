@@ -36,6 +36,7 @@ pipeline {
 			 
 			rtMavenRun ( 
 				tool: 'Maven',
+				pom: 'pom.xml', 
 				goals: 'clean install'
 			)
 				rtServer (
