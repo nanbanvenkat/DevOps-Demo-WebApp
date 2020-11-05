@@ -84,10 +84,16 @@ pipeline {
 		
 		 stage('Deploy to Prod') {
                  steps {
-                  deploy adapters: [tomcat8(url: 'http://52.188.207.204:8080/', credentialsId: 'tomcat', path: '' )], contextPath: '/ProdWebapp', war: '**/*.war'
-		  slackSend channel: 'alerts', message: "Deploy To Prod ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", teamDomain: 'venkattcsdevops', tokenCredentialId: 'slack'
+                  deploy adapters: [tomcat8(url: 'http://20.185.40.91:8080/', credentialsId: 'tomcat', path: '' )], contextPath: '/ProdWebapp', war: '**/*.war'		  
 	            }
-		 }
+		 post {
+                	always {
+                  		jiraSendDeploymentInfo environmentId: 'Prod', environmentName: 'prod', environmentType: 'production', serviceIds: ['http://20.185.40.91:8080/ProdWebapp'], site: 'devopssquad12.atlassian.net', state: 'successful'
+                    		jiraComment body: 'Deployment successful', issueKey: 'DB-1'
+				slackSend channel: 'alerts', message: "Deploy To Prod ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", teamDomain: 'venkattcsdevops', tokenCredentialId: 'slack'
+			}
+            	}
+		}
 		    
 		stage('Sanity test') {
                  steps {
