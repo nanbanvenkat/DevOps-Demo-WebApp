@@ -37,9 +37,7 @@ pipeline {
 			rtMavenRun ( 
 				tool: 'Maven',
 				pom: 'pom.xml', 
-				goals: 'clean install', 
-				deployerId: 'MAVEN_DEPLOYER', 
-				resolverId: 'MAVEN_RESOLVER' 
+				goals: 'clean install'
 			)
 				rtServer (
                     			id: 'ARTIFACTORY_SERVER',
