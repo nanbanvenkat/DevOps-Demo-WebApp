@@ -33,6 +33,14 @@ pipeline {
 		 
 		 stage('Deploy Artifacts') {
                  steps{
+			 
+			rtMavenRun ( 
+				tool: maven,
+				pom: 'pom.xml', 
+				goals: 'clean install', 
+				deployerId: "MAVEN_DEPLOYER", 
+				resolverId: "MAVEN_RESOLVER" 
+			)
 				rtServer (
                     			id: 'ARTIFACTORY_SERVER',
                     			url: 'https://venkatdevops.jfrog.io/artifactory',
