@@ -34,9 +34,9 @@ pipeline {
 		 stage('Deploy Artifacts') {
                  steps{
 				rtServer (
-                    			id: 'artifactory',
-                    			url: 'https://venkatdevops.jfrog.io/artifactory',
-                    			credentialsId: 'deploy'
+                    			id: "artifactory",
+                    			url: "https://venkatdevops.jfrog.io/artifactory",
+                    			credentialsId: "deploy"
                 			)
                 	rtMavenDeployer (
                     			id: "MAVEN_DEPLOYER",
