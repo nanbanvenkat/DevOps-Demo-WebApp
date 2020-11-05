@@ -36,7 +36,6 @@ pipeline {
 			 
 			rtMavenRun ( 
 				tool: 'Maven',
-				pom: 'pom.xml', 
 				goals: 'clean install'
 			)
 				rtServer (
@@ -47,14 +46,14 @@ pipeline {
                 	rtMavenDeployer (
                     			id: 'MAVEN_DEPLOYER',
                     			serverId: 'artifactory',
-                    			releaseRepo: "libs-release-local",
-                    			snapshotRepo: "libs-snapshot-local"
+                    			releaseRepo: 'libs-release-local',
+                    			snapshotRepo: 'libs-snapshot-local'
                 			)
                 	rtMavenResolver (
                     			id: 'MAVEN_RESOLVER',
                     			serverId: 'artifactory',
-                    			releaseRepo: "libs-release",
-                    			snapshotRepo: "libs-snapshot"
+                    			releaseRepo: 'libs-release-local',
+                    			snapshotRepo: 'libs-snapshot-local'
                 		)
 			 rtPublishBuildInfo (
 				 serverId: 'artifactory'
