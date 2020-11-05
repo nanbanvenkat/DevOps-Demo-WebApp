@@ -35,19 +35,19 @@ pipeline {
                  steps{
 			 script{
 				rtServer (
-                    			id: "artifactory",
-                    			url: "https://venkatdevops.jfrog.io/artifactory",
-                    			credentialsId: deploy
+                    			id: 'ARTIFACTORY_SERVER',
+                    			url: "SERVER_URL",
+                    			credentialsId: CREDENTIALS
                 			)
                 	rtMavenDeployer (
                     			id: "MAVEN_DEPLOYER",
-                    			serverId: "artifactory",
+                    			serverId: "ARTIFACTORY_SERVER",
                     			releaseRepo: "libs-release-local",
                     			snapshotRepo: "libs-snapshot-local"
                 			)
                 	rtMavenResolver (
                     			id: "MAVEN_RESOLVER",
-                    			serverId: "artifactory",
+                    			serverId: "ARTIFACTORY_SERVER",
                     			releaseRepo: "libs-release",
                     			snapshotRepo: "libs-snapshot"
                 	)
