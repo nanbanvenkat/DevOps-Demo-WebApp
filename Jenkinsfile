@@ -36,7 +36,7 @@ pipeline {
 			 script{
 				rtServer (
                     			id: "artifactory",
-                    			url: https://venkatdevops.jfrog.io/artifactory,
+                    			url: "https://venkatdevops.jfrog.io/artifactory",
                     			credentialsId: artifactory
                 			)
                 	rtMavenDeployer (
