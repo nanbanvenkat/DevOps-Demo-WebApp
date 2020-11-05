@@ -15,6 +15,12 @@ pipeline {
                  steps {
                       sh 'mvn -Dmaven.test.failure.ignore=true clean package' 		      
                  	}
+		post {
+                	always {
+                     		jiraSendBuildInfo branch: 'https://devopssquad12.atlassian.net/browse/DB-1', site: 'devopssquad12.atlassian.net'
+                    		jiraComment body: 'Build is Successful', issueKey: 'DB-1'
+                	}
+            }
                  }
 		 
 		stage('SonarQube') {
@@ -88,7 +94,7 @@ pipeline {
 	            }
 		 post {
                 	always {
-                  		jiraSendDeploymentInfo environmentId: 'Prod', environmentName: 'prod', environmentType: 'production', serviceIds: ['http://20.185.40.91:8080/ProdWebapp'], site: 'devopssquad12.atlassian.net', state: 'successful'
+                  		jiraSendDeploymentInfo environmentId: 'Prod', environmentName: 'prod', environmentType: 'production', serviceIds: 'http://20.185.40.91:8080/ProdWebapp' , site: 'devopssquad12.atlassian.net', state: 'successful'
                     		jiraComment body: 'Deployment successful', issueKey: 'DB-1'
 				slackSend channel: 'alerts', message: "Deploy To Prod ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", teamDomain: 'venkattcsdevops', tokenCredentialId: 'slack'
 			}
