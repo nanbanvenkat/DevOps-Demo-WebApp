@@ -51,6 +51,9 @@ pipeline {
                     			releaseRepo: "libs-release",
                     			snapshotRepo: "libs-snapshot"
                 		)
+			 rtPublishBuildInfo (
+				 serverId: "ARTIFACTORY_SERVER"
+			 )
 			 	
 			}
 		}
