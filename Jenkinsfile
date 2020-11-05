@@ -17,13 +17,13 @@ pipeline {
                  	}
                  }
 		 
-	//	stage('SonarQube') {
-        //         steps {
-        //            withSonarQubeEnv(credentialsId: 'sonar', installationName: 'sonarqube') { 
-     	//		sh 'mvn clean package sonar:sonar -Dsonar.host.url=http://13.82.181.227:9000/ -Dsonar.sources=. -Dsonar.tests=. -Dsonar.test.inclusions=**/test/java/servlet/createpage_junit.java -Dsonar.exclusions=**/test/java/servlet/createpage_junit.java'
-        //			}
-	//		}
-        //        }
+		stage('SonarQube') {
+                 steps {
+                    withSonarQubeEnv(credentialsId: 'sonar', installationName: 'sonarqube') { 
+     			sh 'mvn clean package sonar:sonar -Dsonar.host.url=http://13.82.181.227:9000/ -Dsonar.sources=. -Dsonar.tests=. -Dsonar.test.inclusions=**/test/java/servlet/createpage_junit.java -Dsonar.exclusions=**/test/java/servlet/createpage_junit.java'
+        			}
+			}
+                }
 		 
                  stage('Deploy to test') {
                  steps {
