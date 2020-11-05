@@ -40,13 +40,13 @@ pipeline {
                     			credentialsId: 'deploy'
                 			)
                 	rtMavenDeployer (
-                    			id: "MAVEN_DEPLOYER",
+                    			id: 'MAVEN_DEPLOYER',
                     			serverId: 'artifactory',
                     			releaseRepo: "libs-release-local",
                     			snapshotRepo: "libs-snapshot-local"
                 			)
                 	rtMavenResolver (
-                    			id: "MAVEN_RESOLVER",
+                    			id: 'MAVEN_RESOLVER',
                     			serverId: 'artifactory',
                     			releaseRepo: "libs-release",
                     			snapshotRepo: "libs-snapshot"
