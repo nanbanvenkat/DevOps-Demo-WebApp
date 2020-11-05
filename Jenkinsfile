@@ -33,11 +33,11 @@ pipeline {
 		 
 		 stage('Deploy Artifacts') {
                  steps{
-			 script{
+			 
 				rtServer (
                     			id: 'ARTIFACTORY_SERVER',
                     			url: "SERVER_URL",
-                    			credentialsId: deploy
+                    			credentialsId: 'deploy'
                 			)
                 	rtMavenDeployer (
                     			id: "MAVEN_DEPLOYER",
@@ -50,8 +50,8 @@ pipeline {
                     			serverId: "ARTIFACTORY_SERVER",
                     			releaseRepo: "libs-release",
                     			snapshotRepo: "libs-snapshot"
-                	)
-			 	}
+                		)
+			 	
 			}
 		}
 		 
