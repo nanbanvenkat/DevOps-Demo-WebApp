@@ -80,13 +80,13 @@ pipeline {
 			}
 		}
 		
-	/*	stage('Performance Test') {
+		stage('Performance Test') {
 		steps{
 			script{
 			blazeMeterTest credentialsId: 'Blazemeter', testId: '8663167.taurus', workspaceId: '659085'
 			}
 		}
-		}	*/
+		}	
 		
 		 stage('Deploy to Prod') {
                  steps {
