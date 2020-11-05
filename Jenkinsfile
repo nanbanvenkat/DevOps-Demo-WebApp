@@ -39,19 +39,19 @@ pipeline {
                     			credentialsId: 'deploy'
                 			)
                 	rtMavenDeployer (
-                    			id: 'artifactory',
-                    			serverId: 'artifactory',
+                    			id: "MAVEN_DEPLOYER",
+                    			serverId: "artifactory",
                     			releaseRepo: "libs-release-local",
                     			snapshotRepo: "libs-snapshot-local"
                 			)
                 	rtMavenResolver (
-                    			id: 'artifactory',
-                    			serverId: 'artifactory',
+                    			id: "MAVEN_RESOLVER",
+                    			serverId: "artifactory",
                     			releaseRepo: "libs-release",
                     			snapshotRepo: "libs-snapshot"
                 		)
 			 rtPublishBuildInfo (
-				 serverId: 'artifactory'
+				 serverId: "artifactory"
 			 )
 			 	
 			}
