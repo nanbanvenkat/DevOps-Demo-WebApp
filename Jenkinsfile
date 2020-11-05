@@ -34,26 +34,25 @@ pipeline {
 		 stage('Deploy Artifacts') {
                  steps{
 				rtServer (
-                    			id: "artifactory",
-                    			url: "https://venkatdevops.jfrog.io/artifactory",
-                    			credentialsId: "deploy"
+                    			id: 'artifactory',
+                    			url: 'https://venkatdevops.jfrog.io/artifactory',
+                    			credentialsId: 'deploy'
                 			)
                 	rtMavenDeployer (
-                    			id: "MAVEN_DEPLOYER",
-                    			serverId: "artifactory",
+                    			id: 'MAVEN_DEPLOYER',
+                    			serverId: 'artifactory',
                     			releaseRepo: "libs-release-local",
                     			snapshotRepo: "libs-snapshot-local"
                 			)
                 	rtMavenResolver (
-                    			id: "MAVEN_RESOLVER",
-                    			serverId: "artifactory",
+                    			id: 'MAVEN_RESOLVER',
+                    			serverId: 'artifactory',
                     			releaseRepo: "libs-release",
                     			snapshotRepo: "libs-snapshot"
                 		)
 			 rtPublishBuildInfo (
-				 serverId: "artifactory"
-			 )
-			 	
+				 serverId: 'artifactory'
+			 )			 	
 			}
 		}
 		 
