@@ -33,7 +33,8 @@ pipeline {
 		 
 		 stage('Deploy Artifacts') {
                  steps{
-			rtPublishBuildInfo(
+			 script{
+				rtPublishBuildInfo(
 						id: 'artifactory',
 						url: 'https://venkatdevops.jfrog.io/artifactory',
 						credentialsId: 'deploy',
@@ -43,6 +44,7 @@ pipeline {
 						// The default value (if not configured) is 300 seconds:
 						timeout: 300
 					)
+			 }
 			}
 		}
 		 
