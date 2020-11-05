@@ -41,18 +41,18 @@ pipeline {
                 			)
                 	rtMavenDeployer (
                     			id: "MAVEN_DEPLOYER",
-                    			serverId: "ARTIFACTORY_SERVER",
+                    			serverId: 'artifactory',
                     			releaseRepo: "libs-release-local",
                     			snapshotRepo: "libs-snapshot-local"
                 			)
                 	rtMavenResolver (
                     			id: "MAVEN_RESOLVER",
-                    			serverId: "ARTIFACTORY_SERVER",
+                    			serverId: 'artifactory',
                     			releaseRepo: "libs-release",
                     			snapshotRepo: "libs-snapshot"
                 		)
 			 rtPublishBuildInfo (
-				 serverId: "ARTIFACTORY_SERVER"
+				 serverId: 'artifactory'
 			 )
 			 	
 			}
