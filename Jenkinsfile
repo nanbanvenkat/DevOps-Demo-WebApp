@@ -38,8 +38,8 @@ pipeline {
 				tool: 'Maven',
 				pom: 'pom.xml', 
 				goals: 'clean install', 
-				deployerId: "MAVEN_DEPLOYER", 
-				resolverId: "MAVEN_RESOLVER" 
+				deployerId: 'MAVEN_DEPLOYER', 
+				resolverId: 'MAVEN_RESOLVER' 
 			)
 				rtServer (
                     			id: 'ARTIFACTORY_SERVER',
