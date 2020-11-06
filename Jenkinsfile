@@ -27,14 +27,14 @@ pipeline {
 		stage('SonarQube') {
                  steps {
                     withSonarQubeEnv(credentialsId: 'sonar', installationName: 'sonar') { 
-     			sh 'mvn clean package sonar:sonar -Dsonar.host.url=http://52.255.136.124:9000/ -Dsonar.login="admin" -Dsonar.password="admin" -Dsonar.sources=. -Dsonar.tests=. -Dsonar.test.inclusions=**/test/java/servlet/createpage_junit.java -Dsonar.exclusions=**/test/java/servlet/createpage_junit.java'
+     			sh 'mvn clean package sonar:sonar -Dsonar.host.url=http://52.188.52.234:9000/ -Dsonar.login="admin" -Dsonar.password="admin" -Dsonar.sources=. -Dsonar.tests=. -Dsonar.test.inclusions=**/test/java/servlet/createpage_junit.java -Dsonar.exclusions=**/test/java/servlet/createpage_junit.java'
         			}
 			}
                 }
 		 
                  stage('Deploy to test') {
                  steps {
-                  deploy adapters: [tomcat8(url: 'http://104.209.157.132:8080/', credentialsId: 'tomcat', path: '' )], contextPath: '/QAWebapp', war: '**/*.war'
+                  deploy adapters: [tomcat8(url: 'http://20.36.203.29:8080/', credentialsId: 'tomcat', path: '' )], contextPath: '/QAWebapp', war: '**/*.war'
 	            }
                  }
 		 
@@ -91,7 +91,7 @@ pipeline {
 		
 		 stage('Deploy to Prod') {
                  steps {
-                  	deploy adapters: [tomcat8(url: 'http://20.185.40.91:8080/', credentialsId: 'tomcat', path: '' )], contextPath: '/ProdWebapp', war: '**/*.war'	
+                  	deploy adapters: [tomcat8(url: 'http://52.255.204.166:8080/', credentialsId: 'tomcat', path: '' )], contextPath: '/ProdWebapp', war: '**/*.war'	
 			
 	            }
 		 post {
