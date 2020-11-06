@@ -14,7 +14,7 @@ pipeline {
 		 
 		 stage('Maven Build') {
                  steps {
-                      sh 'mvn clean install' 		      
+                      sh 'mvn -Dmaven.test.failure.ignore=true clean package' 		      
                  	}
 		post {
                 	always {
@@ -91,7 +91,8 @@ pipeline {
 		
 		 stage('Deploy to Prod') {
                  steps {
-                  deploy adapters: [tomcat8(url: 'http://20.185.40.91:8080/', credentialsId: 'tomcat', path: '' )], contextPath: '/ProdWebapp', war: '**/*.war'		  
+                  	deploy adapters: [tomcat8(url: 'http://20.185.40.91:8080/', credentialsId: 'tomcat', path: '' )], contextPath: '/ProdWebapp', war: '**/*.war'	
+			jiraAddComment idOrKey: "${jiraIssue}", site: 'jira' , comment: "${currentBuild.getCurrentResult()}" + ' Code deployed to Test on ' + "${BUILD_TIMESTAMP}" +  ' Build No: ' + "${buildnum}" +  ' Build URL : ' + "${BUILD_URL}"
 	            }
 		 post {
                 	always {
