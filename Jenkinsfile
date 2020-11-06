@@ -112,7 +112,25 @@ pipeline {
 				}
 			slackSend channel: 'alerts', message: "Sanity Test ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", teamDomain: 'venkattcsdevops', tokenCredentialId: 'slack'
 			}
-		}   
-          	               
-        }
+		}   	
+		}
+	
+	stage('Building image') {
+		steps{
+			script {
+				dockerImage = docker.build imagename
+			}
+			}
+		}
+	
+	stage('Deploy Image') {
+		steps{
+			script {
+				docker.withRegistry( '', registryCredential ) {
+				dockerImage.push("$BUILD_NUMBER")
+				dockerImage.push('latest')
+					}
+				}
+			}
+		}
 }
