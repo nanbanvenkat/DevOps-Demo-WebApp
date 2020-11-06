@@ -1,9 +1,14 @@
 pipeline {
-         agent any
+        agent any
+	
+	environment {
+		imagename = "yenigul/hacicenkins"
+	}
+	
 	 tools {
-        // Note: this should match with the tool name configured in your jenkins instance (JENKINS_URL/configureTools/)
         maven 'Maven'
    	 }
+	
 	 stages {
                  stage('Clone source') {
                  steps {
@@ -80,13 +85,13 @@ pipeline {
 			}
 		}
 		
-		stage('Performance Test') {
+	/*	stage('Performance Test') {
 		steps{
 			script{
 			blazeMeterTest credentialsId: 'Blazemeter', testId: '8663167.taurus', workspaceId: '659085'
 			}
 		}
-		}	
+		} */	
 		
 		 stage('Deploy to Prod') {
                  steps {
