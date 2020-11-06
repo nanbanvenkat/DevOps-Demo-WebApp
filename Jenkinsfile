@@ -1,11 +1,7 @@
 pipeline {
         agent any
 	
-	environment {
-		imagename = "yenigul/hacicenkins"
-	}
-	
-	 tools {
+	tools {
         maven 'Maven'
    	 }
 	
@@ -18,7 +14,7 @@ pipeline {
 		 
 		 stage('Maven Build') {
                  steps {
-                      sh 'mvn -Dmaven.test.failure.ignore=true clean package' 		      
+                      sh 'mvn clean install' 		      
                  	}
 		post {
                 	always {
@@ -85,13 +81,13 @@ pipeline {
 			}
 		}
 		
-	/*	stage('Performance Test') {
+		stage('Performance Test') {
 		steps{
 			script{
 			blazeMeterTest credentialsId: 'Blazemeter', testId: '8663167.taurus', workspaceId: '659085'
 			}
 		}
-		} */	
+		} 
 		
 		 stage('Deploy to Prod') {
                  steps {
@@ -118,24 +114,5 @@ pipeline {
 			slackSend channel: 'alerts', message: "Sanity Test ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", teamDomain: 'venkattcsdevops', tokenCredentialId: 'slack'
 			}
 		} 	
-	
-	stage('Building image') {
-		steps{
-			script {
-				dockerImage = docker.build imagename
-			}
-			}
-		}
-	
-	stage('Deploy Image') {
-		steps{
-			script {
-				docker.withRegistry( '', registryCredential ) {
-				dockerImage.push("$BUILD_NUMBER")
-				dockerImage.push('latest')
-					}
-				}
-			}
-		}
 	 }
 }
